@@ -5,15 +5,16 @@ import GestureCircle from "./GestureCircle";
 interface GestureCirclesProps {
   length: number;
   translationX: Animated.SharedValue<number>;
+  onCirclePress: (x: number) => void;
 }
 
-const GestureCircles: React.FC<GestureCirclesProps> = ({ length, translationX }) => {
+const GestureCircles: React.FC<GestureCirclesProps> = ({ length, translationX, onCirclePress }) => {
   return (
     <>
       {Array(length)
         .fill(0)
         .map((_, index) => (
-          <GestureCircle index={index} key={index} translationX={translationX} />
+          <GestureCircle index={index} key={index} translationX={translationX} onPress={onCirclePress} />
         ))}
     </>
   );
