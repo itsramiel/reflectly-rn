@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 import ColorSelection from "./components/ColorSelection";
 import { COLORS } from "./constants";
 import { useSharedValue } from "react-native-reanimated";
+import GestureCircles from "./components/GestureCircles";
 
 export default function App() {
   const translationX = useSharedValue(0);
@@ -16,6 +17,7 @@ export default function App() {
       <GestureDetector gesture={gesture}>
         <ColorSelection colors={COLORS} translationX={translationX} />
       </GestureDetector>
+      <GestureCircles length={COLORS.length} translationX={translationX} />
     </GestureHandlerRootView>
   );
 }
