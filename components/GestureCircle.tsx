@@ -1,16 +1,11 @@
 import React from "react";
-import { CENTER, ColorType, SCREEN_WIDTH } from "../constants";
+import { CENTER, CIRCLE_DIAMETER, CIRCLE_RADIUS, ColorType, MARGIN, SCREEN_WIDTH } from "../constants";
 import Animated, { useAnimatedStyle } from "react-native-reanimated";
 
 interface GestureCircleProps {
   index: number;
   translationX: Animated.SharedValue<number>;
 }
-
-const MARGIN = 15;
-const VISIBLE_CIRCLES_NUM = 3;
-const CIRCLE_DIAMETER = (SCREEN_WIDTH - 6 * MARGIN) / VISIBLE_CIRCLES_NUM;
-const CIRCLE_RADIUS = CIRCLE_DIAMETER / 2;
 
 const GestureCircle: React.FC<GestureCircleProps> = ({ index, translationX }) => {
   const left = CENTER.x - CIRCLE_RADIUS + index * (CIRCLE_DIAMETER + 2 * MARGIN);

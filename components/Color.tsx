@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import React from "react";
-import { CENTER, ColorType, SCREEN_WIDTH } from "../constants";
+import { CENTER, CIRCLE_DIAMETER, CIRCLE_RADIUS, ColorType, MARGIN, SCREEN_WIDTH } from "../constants";
 import { Circle, Group, SkiaValue, useComputedValue } from "@shopify/react-native-skia";
 
 interface ColorProps {
@@ -8,11 +8,6 @@ interface ColorProps {
   skTranslationX: SkiaValue<number>;
   index: number;
 }
-
-const MARGIN = 15;
-const VISIBLE_CIRCLES_NUM = 3;
-const CIRCLE_DIAMETER = (SCREEN_WIDTH - 6 * MARGIN) / VISIBLE_CIRCLES_NUM;
-const CIRCLE_RADIUS = CIRCLE_DIAMETER / 2;
 
 const Color: React.FC<ColorProps> = ({ color, skTranslationX, index }) => {
   const cx = CENTER.x + index * (CIRCLE_DIAMETER + 2 * MARGIN);
