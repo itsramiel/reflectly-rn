@@ -1,7 +1,6 @@
-import { StyleSheet } from "react-native";
 import React from "react";
 import { CENTER, CIRCLE_DIAMETER, CIRCLE_RADIUS, ColorType, MARGIN, SCREEN_WIDTH } from "../constants";
-import { Circle, Group, SkiaValue, useComputedValue } from "@shopify/react-native-skia";
+import { Circle, Group, LinearGradient, SkiaValue, useComputedValue, vec } from "@shopify/react-native-skia";
 
 interface ColorProps {
   color: ColorType;
@@ -19,7 +18,10 @@ const Color: React.FC<ColorProps> = ({ color, skTranslationX, index }) => {
   }, [skTranslationX]);
   return (
     <Group transform={transform}>
-      <Circle cx={cx} cy={cy} r={r} color={color.start} />
+      <Circle cx={cx} cy={cy} r={r}>
+        <LinearGradient start={vec(cx, cy - r)} end={vec(cx, cy + r)} colors={[color.start, color.end]} />
+      </Circle>
+      <Circle cx={cx} cy={cy} r={r} style="stroke" color={"white"} strokeWidth={r * 0.1} />
     </Group>
   );
 };

@@ -7,14 +7,17 @@ import { useSharedValue, withSpring } from "react-native-reanimated";
 import GestureCircles from "./components/GestureCircles";
 import { useCallback } from "react";
 import { clamp, snapPoint } from "./utils";
-import { Canvas, Easing, runTiming, useValue, useValueEffect } from "@shopify/react-native-skia";
+import { Canvas, Easing, LinearGradient, runTiming, useValue, vec } from "@shopify/react-native-skia";
 import Foreground from "./components/Foreground";
+import Background from "./components/Background";
 
 const snapPoints = COLORS.map((color, index) => -index * (CIRCLE_DIAMETER + 2 * MARGIN));
 
 export default function App() {
   const translationX = useSharedValue(0);
   const progress = useValue(0);
+  const fgColors = useValue([COLORS[0].start, COLORS[0].end]);
+  const bgColors = useValue([COLORS[0].start, COLORS[0].end]);
 
   const gesture = Gesture.Pan()
     .onChange((e) => {
@@ -22,13 +25,16 @@ export default function App() {
       translationX.value = clamp(translation, snapPoints[snapPoints.length - 1], snapPoints[0]);
     })
     .onEnd(({ velocityX }) => {
-      translationX.value = withSpring(snapPoint(translationX.value, velocityX * 0.5, snapPoints));
+      translationX.value = withSpring(snapPoint(translationX.value, velocityX, snapPoints));
     });
 
   const onCirclePressed = useCallback((index: number) => {
     translationX.value = withSpring(snapPoints[index]);
     progress.current = 0;
-    runTiming(progress, 1, { easing: Easing.inOut(Easing.ease) });
+    fgColors.current = [COLORS[index].start, COLORS[index].end];
+    runTiming(progress, 1, { easing: Easing.inOut(Easing.ease) }, () => {
+      bgColors.current = [COLORS[index].start, COLORS[index].end];
+    });
   }, []);
 
   return (
@@ -36,7 +42,8 @@ export default function App() {
       <ExpoStatusBar style="light" />
       <GestureDetector gesture={gesture}>
         <Canvas style={styles.canvas}>
-          <Foreground progress={progress} />
+          <Background colors={bgColors} />
+          <Foreground progress={progress} colors={fgColors} />
           <ColorSelection colors={COLORS} translationX={translationX} />
         </Canvas>
       </GestureDetector>
