@@ -27,8 +27,7 @@ export default function App() {
 
   const gesture = Gesture.Pan()
     .onChange((e) => {
-      const translation = translationX.value + e.changeX;
-      translationX.value = clamp(translation, snapPoints[snapPoints.length - 1], snapPoints[0]);
+      translationX.value += e.changeX;
     })
     .onEnd(({ velocityX }) => {
       translationX.value = withSpring(snapPoint(translationX.value, velocityX, snapPoints));
