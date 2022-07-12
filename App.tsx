@@ -7,7 +7,8 @@ import { useSharedValue, withSpring } from "react-native-reanimated";
 import GestureCircles from "./components/GestureCircles";
 import { useCallback } from "react";
 import { clamp, snapPoint } from "./utils";
-import { Canvas, runTiming, useValue, useValueEffect } from "@shopify/react-native-skia";
+import { Canvas, Easing, runTiming, useValue, useValueEffect } from "@shopify/react-native-skia";
+import Foreground from "./components/Foreground";
 
 const snapPoints = COLORS.map((color, index) => -index * (CIRCLE_DIAMETER + 2 * MARGIN));
 
@@ -27,7 +28,7 @@ export default function App() {
   const onCirclePressed = useCallback((index: number) => {
     translationX.value = withSpring(snapPoints[index]);
     progress.current = 0;
-    runTiming(progress, 1);
+    runTiming(progress, 1, { easing: Easing.inOut(Easing.ease) });
   }, []);
 
   return (
@@ -35,6 +36,7 @@ export default function App() {
       <ExpoStatusBar style="light" />
       <GestureDetector gesture={gesture}>
         <Canvas style={styles.canvas}>
+          <Foreground progress={progress} />
           <ColorSelection colors={COLORS} translationX={translationX} />
         </Canvas>
       </GestureDetector>
