@@ -1,4 +1,4 @@
-import { Dimensions, StatusBar } from "react-native";
+import { Dimensions } from "react-native";
 
 const { height, width } = Dimensions.get("window");
 
@@ -9,6 +9,7 @@ export const MARGIN = 15;
 export const VISIBLE_CIRCLES_NUM = 3;
 export const CIRCLE_DIAMETER = (SCREEN_WIDTH - 2 * VISIBLE_CIRCLES_NUM * MARGIN) / VISIBLE_CIRCLES_NUM;
 export const CIRCLE_RADIUS = CIRCLE_DIAMETER / 2;
+export const CIRCLE_SIZE = 2 * MARGIN + CIRCLE_DIAMETER;
 
 export const CENTER = { x: SCREEN_WIDTH / 2, y: SCREEN_HEIGHT / 2 };
 
