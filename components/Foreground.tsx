@@ -1,6 +1,6 @@
 import React from "react";
 import { CENTER, SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants";
-import { Circle, Color, interpolate, LinearGradient, SkiaValue, useComputedValue, vec } from "@shopify/react-native-skia";
+import { BlurMask, Circle, Color, interpolate, LinearGradient, SkiaValue, useComputedValue, vec } from "@shopify/react-native-skia";
 
 interface ForegroundProps {
   progress: SkiaValue<number>;
@@ -15,6 +15,7 @@ const Foreground: React.FC<ForegroundProps> = ({ progress, colors }) => {
   return (
     <Circle cx={CENTER.x} cy={CENTER.y} r={radius}>
       <LinearGradient start={vec(SCREEN_WIDTH / 2, 0)} end={vec(SCREEN_WIDTH / 2, SCREEN_HEIGHT)} colors={colors} />
+      <BlurMask blur={20} style="solid" />
     </Circle>
   );
 };
