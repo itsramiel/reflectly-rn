@@ -17,16 +17,12 @@ const ColorSelection: React.FC<ColorSelectionProps> = ({ colors, translationX })
   }, translationX);
 
   return (
-    <Canvas style={styles.canvas}>
+    <>
       {colors.map((color, index) => {
         return <Color color={color} skTranslationX={skTranslationX} key={index} index={index} />;
       })}
-    </Canvas>
+    </>
   );
 };
 
 export default ColorSelection;
-
-const styles = StyleSheet.create({
-  canvas: { width: SCREEN_WIDTH, height: SCREEN_HEIGHT },
-});

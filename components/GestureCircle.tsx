@@ -1,6 +1,6 @@
 import React from "react";
 import { CENTER, CIRCLE_DIAMETER, CIRCLE_RADIUS, ColorType, MARGIN, SCREEN_WIDTH } from "../constants";
-import Animated, { useAnimatedStyle } from "react-native-reanimated";
+import Animated, { runOnJS, useAnimatedStyle } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 interface GestureCircleProps {
@@ -25,7 +25,7 @@ const GestureCircle: React.FC<GestureCircleProps> = ({ index, translationX, onPr
     };
   }, []);
 
-  const gesture = Gesture.Tap().onStart(() => onPress(index));
+  const gesture = Gesture.Tap().onStart(() => runOnJS(onPress)(index));
 
   return (
     <GestureDetector gesture={gesture}>

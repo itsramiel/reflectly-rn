@@ -2,16 +2,18 @@ import { Gesture, GestureDetector, GestureHandlerRootView } from "react-native-g
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import ColorSelection from "./components/ColorSelection";
-import { CIRCLE_DIAMETER, COLORS, MARGIN } from "./constants";
+import { CIRCLE_DIAMETER, COLORS, MARGIN, SCREEN_HEIGHT, SCREEN_WIDTH } from "./constants";
 import { useSharedValue, withSpring } from "react-native-reanimated";
 import GestureCircles from "./components/GestureCircles";
 import { useCallback } from "react";
 import { clamp, snapPoint } from "./utils";
+import { Canvas, runTiming, useValue, useValueEffect } from "@shopify/react-native-skia";
 
 const snapPoints = COLORS.map((color, index) => -index * (CIRCLE_DIAMETER + 2 * MARGIN));
 
 export default function App() {
   const translationX = useSharedValue(0);
+  const progress = useValue(0);
 
   const gesture = Gesture.Pan()
     .onChange((e) => {
@@ -23,15 +25,18 @@ export default function App() {
     });
 
   const onCirclePressed = useCallback((index: number) => {
-    "worklet";
     translationX.value = withSpring(snapPoints[index]);
+    progress.current = 0;
+    runTiming(progress, 1);
   }, []);
 
   return (
     <GestureHandlerRootView style={styles.container}>
       <ExpoStatusBar style="light" />
       <GestureDetector gesture={gesture}>
-        <ColorSelection colors={COLORS} translationX={translationX} />
+        <Canvas style={styles.canvas}>
+          <ColorSelection colors={COLORS} translationX={translationX} />
+        </Canvas>
       </GestureDetector>
       <GestureCircles length={COLORS.length} translationX={translationX} onCirclePress={onCirclePressed} />
     </GestureHandlerRootView>
@@ -42,5 +47,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#000",
+  },
+  canvas: {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
   },
 });
