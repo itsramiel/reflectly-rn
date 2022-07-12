@@ -1,7 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Circle, Color, interpolate, LinearGradient, SkiaValue, useComputedValue, vec } from "@shopify/react-native-skia";
 import { CENTER, SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants";
+import { Circle, Color, interpolate, LinearGradient, SkiaValue, useComputedValue, vec } from "@shopify/react-native-skia";
 
 interface ForegroundProps {
   progress: SkiaValue<number>;
@@ -21,5 +20,3 @@ const Foreground: React.FC<ForegroundProps> = ({ progress, colors }) => {
 };
 
 export default Foreground;
-
-const styles = StyleSheet.create({});

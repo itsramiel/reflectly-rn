@@ -1,15 +1,21 @@
-import { Gesture, GestureDetector, GestureHandlerRootView } from "react-native-gesture-handler";
-import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
-import ColorSelection from "./components/ColorSelection";
+// Constants
 import { CIRCLE_DIAMETER, COLORS, MARGIN, SCREEN_HEIGHT, SCREEN_WIDTH } from "./constants";
-import { useSharedValue, withSpring } from "react-native-reanimated";
-import GestureCircles from "./components/GestureCircles";
+// Hooks
 import { useCallback } from "react";
+import { useSharedValue, withSpring } from "react-native-reanimated";
+import { runTiming, useValue } from "@shopify/react-native-skia";
+// Utils
+import { StyleSheet } from "react-native";
 import { clamp, snapPoint } from "./utils";
-import { Canvas, Easing, LinearGradient, runTiming, useValue, vec } from "@shopify/react-native-skia";
+import { Easing } from "@shopify/react-native-skia";
+// Components
 import Foreground from "./components/Foreground";
 import Background from "./components/Background";
+import { Canvas } from "@shopify/react-native-skia";
+import GestureCircles from "./components/GestureCircles";
+import ColorSelection from "./components/ColorSelection";
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import { Gesture, GestureDetector, GestureHandlerRootView } from "react-native-gesture-handler";
 
 const snapPoints = COLORS.map((color, index) => -index * (CIRCLE_DIAMETER + 2 * MARGIN));
 

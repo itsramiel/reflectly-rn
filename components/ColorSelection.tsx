@@ -1,9 +1,8 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Canvas, Circle, Group, useSharedValueEffect, useValue } from "@shopify/react-native-skia";
-import { CENTER, ColorType, SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants";
-import Animated from "react-native-reanimated";
 import Color from "./Color";
+import { ColorType } from "../constants";
+import Animated from "react-native-reanimated";
+import { useSharedValueEffect, useValue } from "@shopify/react-native-skia";
 
 interface ColorSelectionProps {
   colors: ColorType[];

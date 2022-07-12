@@ -1,7 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Color, LinearGradient, Rect, SkiaValue, vec } from "@shopify/react-native-skia";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants";
+import { Color, LinearGradient, Rect, SkiaValue, vec } from "@shopify/react-native-skia";
 
 interface BackgroundProps {
   colors: SkiaValue<Color[]>;
@@ -16,5 +15,3 @@ const Background: React.FC<BackgroundProps> = ({ colors }) => {
 };
 
 export default Background;
-
-const styles = StyleSheet.create({});

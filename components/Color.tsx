@@ -1,5 +1,5 @@
 import React from "react";
-import { CENTER, CIRCLE_DIAMETER, CIRCLE_RADIUS, ColorType, MARGIN, SCREEN_WIDTH } from "../constants";
+import { CENTER, CIRCLE_DIAMETER, CIRCLE_RADIUS, ColorType, MARGIN } from "../constants";
 import { Circle, Group, LinearGradient, SkiaValue, useComputedValue, vec } from "@shopify/react-native-skia";
 
 interface ColorProps {
